@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.front.deploymentname }}
+  labels:
+    app: {{ .Values.front.deploymentlabel }}
+spec:
+  template:
+    metadata:
+      name: {{ .Values.front.podname }}
+      labels:
+        app: {{ .Values.front.podlabel }}
+    spec:
+      containers:
+        - name: {{ .Values.front.imagename }}
+          image: {{ .Values.front.podimage }}
+  replicas: 3
+  selector:
+    matchLabels:
+      app: {{ .Values.front.podlabel }}
+      
